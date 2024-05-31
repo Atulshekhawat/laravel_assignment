@@ -71,4 +71,29 @@ class UserController extends Controller
             }
         }
     }
+
+
+    public function show($id){
+
+        $user = Userdata::find($id);
+
+        if($user){
+
+            return response()-> json([
+                'status' => 200,
+                'user' => $user
+            ],200) ;
+
+        }else{
+
+            return response()-> json([
+                'status' => 404,
+                'message' => 'No Such User Found'
+            ],404) ;
+
+        }
+
+        
+
+    }
 }
