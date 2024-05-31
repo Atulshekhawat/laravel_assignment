@@ -92,8 +92,78 @@ class UserController extends Controller
             ],404) ;
 
         }
+    }
 
+    public function update(Request $request, int $id){
+
+
+        $validator = Validator::make($request ->all(),[
+            'name' => 'required | max:190',
+            'email' => 'required |email| max:190',
+            'phoneNo' => 'required | digits:10'
+        ]);
+
+        if($validator->fails()){
+
+            return response()->json([
+                'status' => 422,
+                'error' =>$validator -> messages()
+            ],422); 
+        }else{
+
+            $user = Userdata::find($id);
+
+           
+
+
+            if($user){
+
+                $user -> update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phoneNo' => $request->phoneNo
+                ]);
+
+                return response()-> json([
+                    'status' => 200,
+                    'message' => 'User Updated sucessfully'
+                ],200) ;
+
+            }else{
+
+                return response()-> json([
+                    'status' => 404,
+                    'message' => 'No Such User Found'
+                ],404) ;
+
+            }
+        }
+
+    }
+    
+
+
+    public function delete($id){
         
+        $user = Userdata::find($id);
+
+        if($user){
+
+            $user -> delete(); 
+
+
+            return response()-> json([
+                'status' => 200,
+                'message' => 'User Deleted Sucessfully'
+            ],200) ;
+
+        }else{
+
+            return response()-> json([
+                'status' => 500,
+                'message' => 'No Such User Found'
+            ],500) ;
+        }
 
     }
 }

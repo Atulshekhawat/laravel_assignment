@@ -11,6 +11,11 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/users',[UserController::class,'index' ]);
 
-Route::post('/users',[UserController::class,'store' ]);
+Route::post('/user',[UserController::class,'store' ]);
 
-Route::get('/users/{id}',[UserController::class,'show' ]);
+Route::get('/user/{id}',[UserController::class,'show' ]);
+
+Route::put('/user/update/{id}',[UserController::class,'update' ]);
+
+
+Route::delete('/user/delete/{id}',[UserController::class,'delete']);
