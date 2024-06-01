@@ -58,7 +58,7 @@ class UserController extends Controller
 
                 return response()-> json([
                     'status' => 200,
-                    'message' => 'user data added sucessfully'
+                    'message' => 'Data added sucessfully'
                 ],200) ;
 
             }else{
